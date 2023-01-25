@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="system">
+      <UniqueIdentifier>{22dd8095-74f9-46df-81a1-36675a040b1f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="system\system.cpp">
+      <Filter>system</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp" />
+    <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="Medal.cpp" />
+    <ClCompile Include="GameCamera.cpp" />
+    <ClCompile Include="Bout.cpp" />
+    <ClCompile Include="Ball1.cpp" />
+    <ClCompile Include="Bouto.cpp" />
+    <ClCompile Include="Yokoana.cpp" />
+    <ClCompile Include="TItle.cpp" />
+    <ClCompile Include="Counter.cpp" />
+    <ClCompile Include="Pusher.cpp" />
+    <ClCompile Include="Choice.cpp" />
+    <ClCompile Include="Text.cpp" />
+    <ClCompile Include="JPCnot.cpp" />
+    <ClCompile Include="JPCball.cpp" />
+    <ClCompile Include="Rule.cpp" />
+    <ClCompile Include="Ajpc.cpp" />
+    <ClCompile Include="Pjpc.cpp" />
+    <ClCompile Include="Gameover.cpp" />
+    <ClCompile Include="JPCnot2.cpp" />
+    <ClCompile Include="Bout2.cpp" />
+    <ClCompile Include="PR_Doom.cpp" />
+    <ClCompile Include="PR_wing.cpp" />
+    <ClCompile Include="PR_not.cpp" />
+    <ClCompile Include="Ball2.cpp" />
+    <ClCompile Include="Ball3.cpp" />
+    <ClCompile Include="Haitou.cpp" />
+    <ClCompile Include="GameClear.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="system\system.h">
+      <Filter>system</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="BackGround.h" />
+    <ClInclude Include="Medal.h" />
+    <ClInclude Include="GameCamera.h" />
+    <ClInclude Include="Bout.h" />
+    <ClInclude Include="Ball1.h" />
+    <ClInclude Include="Bouto.h" />
+    <ClInclude Include="Yokoana.h" />
+    <ClInclude Include="Title.h" />
+    <ClInclude Include="Counter.h" />
+    <ClInclude Include="Pusher.h" />
+    <ClInclude Include="Choice.h" />
+    <ClInclude Include="Text.h" />
+    <ClInclude Include="JPCnot.h" />
+    <ClInclude Include="JPCball.h" />
+    <ClInclude Include="Rule.h" />
+    <ClInclude Include="Ajpc.h" />
+    <ClInclude Include="Pjpc.h" />
+    <ClInclude Include="Gameover.h" />
+    <ClInclude Include="JPCnot2.h" />
+    <ClInclude Include="Bout2.h" />
+    <ClInclude Include="PR_Doom.h" />
+    <ClInclude Include="PR_wing.h" />
+    <ClInclude Include="PR_not.h" />
+    <ClInclude Include="Ball2.h" />
+    <ClInclude Include="Ball3.h" />
+    <ClInclude Include="Haitou.h" />
+    <ClInclude Include="GameClear.h" />
+  </ItemGroup>
+</Project>
