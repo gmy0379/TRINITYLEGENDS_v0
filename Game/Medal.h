@@ -1,6 +1,7 @@
 #pragma once
 
 class Counter;
+class Choice;
 //プレイヤークラス。
 class Medal : public IGameObject
 {
@@ -16,34 +17,16 @@ public:
 		return position;
 	}
 
-	//void AddForce(const Vector3& force, const Vector3& relPos)
-	//{
-	//	btVector3 btForce;
-	//	btVector3 btRelPos;
-	//	btForce.setValue(force.x, force.y, force.z);
-	//	btRelPos.setValue(relPos.x, relPos.y, relPos.z);
-	//	/*position->applyForce(btForce, btRelPos);
-	//	position->activate();*/
-	//}
 	void AddMoveSpeed(const Vector3& addMoveSpeed)
 	{
 		position += addMoveSpeed;
 	}
 
-	/*CharacterControllerCylinder& GetCharacterControllerC()
-	{
-		return characterControllerC;
-	}*/
-	/*CollisionObject& GetCollisionObject()
-	{
-		return collisionObject;
-	}*/
-
 	//移動処理。
 	
 	void Rotation();
 	//ステート管理。
-	//void ManageState();
+	void LevelState();
 	//アニメーションの再生。
 	//void PlayAnimation();
 	//音楽の再生
@@ -57,13 +40,14 @@ public:
 	//メンバ変数
 	//void Move();
 
-	
+	Choice* choice;
 	ModelRender modelRender;	//モデルレンダ―。
 	Counter* counter;
 	Quaternion rotation;  //クォータニオン。
 	int playerState = 0;	//プレイヤーのステート(状態)を表す変数。
 	FontRender fontRender;
 	int M = 0;
+	int GetSentaku = 0;
 
 	PhysicsCylinderObject physicsCylinderObject;
 };

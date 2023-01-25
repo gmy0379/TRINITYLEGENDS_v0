@@ -19,10 +19,7 @@ Counter::~Counter()
 void Counter::Update()
 {
 	PO =  Mget/ Mfall*100.0f;
-	if (PO <= 0.0f)
-		PO = 0.0f;
-	else if (PO >= 100.0f)
-		PO = 100.0f;
+
 	//メダル枚数表示
 
 	wchar_t wcsbuf[256];
@@ -56,19 +53,6 @@ void Counter::Update()
 		fontRender.SetColor(0.0f, 0.0f, 1.0f, 1.0f);
 		End = 0;
 	}
-
-
-
-	//wchar_t wcsbuf1[256];
-	//swprintf_s(wcsbuf1, 256, L"総落下枚数 %d", Msum);
-
-	//	//表示するテキストを設定。
-	//	fontRender.SetText(wcsbuf1);
-	//	//フォントの位置を設定。
-	//	fontRender.SetPosition(Vector3(300.0f, -300.0f, 0.0f));
-	//	//フォントの大きさを設定。
-	//	fontRender.SetScale(2.0f);
-	//	fontRender.SetColor(1.0f, 0.0f, 1.0f, 1.0f);
 }
 
 void Counter::Render(RenderContext& rc)

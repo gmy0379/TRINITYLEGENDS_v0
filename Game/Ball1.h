@@ -30,10 +30,7 @@ public:
 		moveSpeed += addMoveSpeed;
 	}
 
-	/*CharacterController& GetCharacterController()
-	{
-		return characterController;
-	}*/
+
 int ballState = 0;	//プレイヤーのステート(状態)を表す変数。
 private:
 	

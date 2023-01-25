@@ -7,7 +7,7 @@ BackGround::BackGround()
 	//PhysicsWorld::GetInstance()->EnableDrawDebugWireFrame();
 
 	//モデルデータには現時点でs14を採用する。
-	modelRender.Init("Assets/modelData/MEDAL/s29.tkm");
+	modelRender.Init("Assets/modelData/MEDAL/s30.tkm");
 	modelRender.Update();
 	physicsStaticObject.CreateFromModel(modelRender.GetModel(), modelRender.GetModel().GetWorldMatrix(),0.7f);
 	physicsStaticObject.SetFriction(0.7f);

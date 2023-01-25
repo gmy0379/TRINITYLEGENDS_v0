@@ -38,7 +38,7 @@ Yokoana::Yokoana()
 
 Yokoana::~Yokoana()
 {
-
+	DeleteGO(this);
 }
 
 void Yokoana::Render(RenderContext& rc)

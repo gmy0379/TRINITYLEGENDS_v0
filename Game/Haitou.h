@@ -9,7 +9,7 @@ class Haitou : public IGameObject
 {
 	Counter* counter;
 	Game* game;
-	SoundSource* gameBGM;		//ゲーム中のBGM。
+	//SoundSource* gameBGM;		//ゲーム中のBGM。
 	
 public:
 	Haitou();

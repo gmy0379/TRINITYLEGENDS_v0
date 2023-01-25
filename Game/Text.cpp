@@ -21,12 +21,7 @@ void Text::Update()
 		game = FindGO<Game>("game");
 		return;
 	}
-	/*if (game->GameState == 1 || game->GameState == 2 || game->GameState == 3) {
-		State = 1;
-	}
-	else {
-		State = 0;
-	}*/
+
 	fcount++;
 	ManageState();
 //JP枚数計測
@@ -34,7 +29,7 @@ wchar_t wcsbuf[256];
 if (fcount < 250) {
 swprintf_s(wcsbuf, 256, L"ルビーJP枚数 %g",RJP+(addR/57.3));
 fontRender.SetColor(1.0f, 0.0f, 1.0f, 1.0f);
-fontRender.SetShadowParam(true, 0.6f, Vector4(0.0f, 0.0f, 0.0f, 0.4f));
+fontRender.SetShadowParam(true, 1.0f, Vector4(0.0f, 0.0f, 0.0f, 1.0f));
 }
 
 else if (fcount >= 250 && fcount < 400)
@@ -48,7 +43,7 @@ else
 {
 swprintf_s(wcsbuf, 256, L"パイライトJP枚数 %g", PJP + (addP / 57.3));
 fontRender.SetColor(1.0f, 0.7f, 0.0f, 1.0f);
-fontRender.SetShadowParam(true, 0.6f, Vector4(0.0f, 0.0f, 0.0f, 0.4f));
+fontRender.SetShadowParam(true, 0.8f, Vector4(0.0f, 0.0f, 0.0f, 0.8f));
 }
 
 float rjpc = (RJP + addR);
@@ -78,9 +73,7 @@ if (PJP >= 9999.99f) {
 //表示するテキストを設定。
 fontRender.SetText(wcsbuf);
 //フォントの位置を設定。
-//fontRender.SetPosition(Vector3(180.0f, 400.0f, 0.0f));
-//fontRender.SetPosition(Vector3(-200.0f, 300.0f, 0.0f));
-fontRender.SetPosition(Vector3(-900.0f, 200.0f, 0.0f));
+fontRender.SetPosition(Vector3(-900.0f, 400.0f, 0.0f));
 //フォントの大きさを設定。
 fontRender.SetScale(1.0f);
 

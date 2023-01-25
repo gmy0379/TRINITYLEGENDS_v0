@@ -18,15 +18,15 @@ bool GameCamera::Start()
 	//注視点から視点までのベクトルを設定。
 	m_toCameraPos.Set(-150.0f, 600.0f, 1000.0f);
 	//プレイヤーのインスタンスを探す。
-	medal = FindGO<Medal>("medal");
+	//medal = FindGO<Medal>("medal");
 
 	/*j1 = FindGO<Rjpc>("j1");
 	j2 = FindGO<Ajpc>("j2");
 	j3 = FindGO<Pjpc>("j3");*/
 
-	//カメラのニアクリップとファークリップを設定する。
+	//カメラのニアクリップとファークリップ(描画距離)を設定する。
 	g_camera3D->SetNear(1.0f);
-	g_camera3D->SetFar(10000.0f);
+	g_camera3D->SetFar(30000.0f);
 
 	return true;
 }
@@ -76,11 +76,11 @@ void GameCamera::Update()
 
 	//カメラの左右制限
 	if (toPosDir.x < -0.7f) {
-		//カメラが上向きすぎ。
+		//カメラが左向きすぎ。
 		m_toCameraPos = toCameraPosOld;
 	}
 	else if (toPosDir.x> 0.7f) {
-		//カメラが下向きすぎ。
+		//カメラが右向きすぎ。
 		m_toCameraPos = toCameraPosOld;
 	}
 

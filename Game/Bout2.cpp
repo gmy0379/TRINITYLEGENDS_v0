@@ -7,7 +7,7 @@ Bout2::Bout2()
 	//PhysicsWorld::GetInstance()->EnableDrawDebugWireFrame();
 
 	//•s“®•”•ª‚ğì¬B
-	modelRender.SetRaytracingWorld(false);
+	//modelRender.SetRaytracingWorld(false);
 	modelRender.Init("Assets/modelData/MEDAL/boutx5-2.tkm");
 	modelRender.Update();
 	physicsStaticObject.CreateFromModel(modelRender.GetModel(), modelRender.GetModel().GetWorldMatrix(), 0.2f);
