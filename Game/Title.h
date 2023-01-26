@@ -2,7 +2,7 @@
 #include "sound/SoundSource.h"
 
 class Choice;
-class Fade;
+//class Fade;
 //タイトル。
 class Title : public IGameObject
 {
@@ -18,6 +18,6 @@ public:
 	FontRender fontRender;
 	int		frame = 0;
 	int		st = 0;
-	Fade* m_fade = nullptr;
+	//Fade* m_fade = nullptr;
 };
 

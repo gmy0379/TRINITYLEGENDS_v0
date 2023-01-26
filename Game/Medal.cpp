@@ -16,11 +16,9 @@ Medal::Medal()
 	modelRender.Init("Assets/modelData/MEDAL/medalv10.tkm");
 	modelRender.SetScale({1.5f,1.2f,1.5f});
 	position = (Vector3(rand() % 100 -rand()%350, 370, -440));
-	g_soundEngine->ResistWaveFileBank(1, "Assets/sound/medalGET.wav");
-	g_soundEngine->ResistWaveFileBank(2, "Assets/sound/m_fall.wav");
 	physicsCylinderObject.CreateCylinder({ 40.0f, 4.0f, 40.0f },
-		position + (Vector3(0.0f, 40.0f, 0.0f)), rotation, 0.0f, 50.0f);
-	physicsCylinderObject.SetFriction(0.45f);
+		position + (Vector3(0.0f, 40.0f, 0.0f)), rotation, 0.2f, 5.0f);
+	physicsCylinderObject.SetFriction(0.35f);
 
 	counter = FindGO<Counter>("counter");
 	choice = FindGO<Choice>("choice");
@@ -166,7 +164,7 @@ void Medal::PlayMusic()
 	if (position.y <= -400&&position.y>=-415&&position.z>300.0f) {
 		//ƒRƒCƒ“Šl“¾‰¹‚ð–Â‚ç‚·
 		SoundSource* se = NewGO<SoundSource>(0);
-		se->Init(1);
+		se->Init(18);
 		se->SetVolume(fall);
 		se->Play(false);
 	}

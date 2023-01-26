@@ -4,7 +4,7 @@
 
 namespace
 {
-	float SPEED = -50.0f;
+	float SPEED = -60.0f;
 	Vector3 COLLISION_HEIGHT = Vector3(-124.0f, 108.0f, -300.0f);
 	Vector3	COLLISION_SIZE = Vector3(500.0f, 2.0f, 240.0f);
 	Vector3 COLLISION_HEIGHT2 = Vector3(-124.0f, 20.0f, -117.0f);
@@ -22,8 +22,8 @@ Pusher::Pusher()
 	//ÉÇÉfÉãÇì«Ç›çûÇﬁÅB
 	modelRender.Init("Assets/modelData/MEDAL/pusher11.tkm");
 	modelRender.Update();
-	physicsStaticObjectP.CreateFromModel(modelRender.GetModel(), modelRender.GetModel().GetWorldMatrix(),2.4f);
-	physicsStaticObjectP.SetFriction(0.0f);
+	physicsStaticObjectP.CreateFromModel(modelRender.GetModel(), modelRender.GetModel().GetWorldMatrix(),4.4f);
+	physicsStaticObjectP.SetFriction(0.3f);
 
 }
 

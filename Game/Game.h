@@ -89,6 +89,7 @@ public:
 
 	float m_time = 0.0f;
 	int timer = 0;
+	int hour = 0;
 	int min = 0;
 	int sec = 0;
 	int m = 0;
@@ -109,6 +110,8 @@ public:
 	int musicC = 0;
 	int Mctrl = 0;
 	int WINctrl = 0;
+	int JP = 0;
+	int addJP = 0;
 
 };
 

@@ -52,7 +52,7 @@ void Haitou::Update()
 		//フォントの位置を設定。
 		//wintext.SetPosition(Vector3(180.0f, 400.0f, 0.0f));
 		wintext.SetPosition(Vector3(-200.0f, 300.0f, 0.0f));
-		if (game->win >= 1000 && game->win <= 1500) {
+		if (game->JP==1) {
 			fcount++;
 			swprintf_s(wcsbuf, 256, L"CONGRATURATIONS!!\nルビーJP %d win", game->win);
 			wintext.SetColor(Vector4(1.0f, 0.0f, 0.2f, 1.0f));
@@ -64,9 +64,10 @@ void Haitou::Update()
 			if (fcount > 500) {
 				game->win = 0;
 				State = 0;
+				game->JP = 0;
 			}
 		}
-		else if (game->win > 1500 && game->win <= 3000) {
+		else if (game->JP == 2) {
 			fcount++;
 			swprintf_s(wcsbuf, 256, L"CONGRATURATIONS!!\nアクアマリンJP %d win", game->win);
 			wintext.SetColor(Vector4(0.2f, 0.2f, 1.0f, 1.0f));
@@ -78,9 +79,10 @@ void Haitou::Update()
 			if (fcount > 500) {
 				game->win = 0;
 				State = 0;
+				game->JP = 0;
 			}
 		}
-		else if (game->win > 3000 && game->win <= 4500) {
+		else if (game->JP == 3) {
 			fcount++;
 			swprintf_s(wcsbuf, 256, L"CONGRATURATIONS!!\nパイライトJP %d win", game->win);
 			wintext.SetColor(Vector4(1.0f, 1.0f, 0.1f, 0.8f));
@@ -92,13 +94,14 @@ void Haitou::Update()
 			if (fcount > 500) {
 				game->win = 0;
 				State = 0;
+				game->JP = 0;
 			}
 		}
-		else if (game->win > 4500) {
+		else if (game->win > 5000) {
 			fcount++;
 			swprintf_s(wcsbuf, 256, L"CONGRATURATIONS!!\nパーフェクトJP %d win", game->win);
-			wintext.SetColor(Vector4(1.0f, 1.0f, 0.1f, 0.6f));
-			wintext.SetShadowParam(true, 0.3f, Vector4(0.0f, 0.0f, 0.0f, 0.4f));
+			wintext.SetColor(Vector4(1.0f, 1.0f, 1.0f, 0.6f));
+			wintext.SetShadowParam(true, 0.7f, Vector4(0.0f, 0.0f, 0.0f, 0.4f));
 			if (State == 0) {
 				//game->m_time = 0;
 				State = 1;
@@ -106,6 +109,7 @@ void Haitou::Update()
 			if (fcount > 500) {
 				game->win = 0;
 				State = 0;
+				game->JP = 0;
 			}
 		}
 		else if (game->win <= 999 && game->win > 0) {
@@ -138,25 +142,25 @@ void Haitou::Update()
 		wintext.SetPosition(Vector3(-900.0f, 100.0f, 0.0f));
 		//フォントの大きさを設定。
 		wintext.SetScale(1.5f);
+
+
+
+
+if (RJP >= 2999.99f) {
+	RJP = 3000.0f;
 }
 
+if (AJP >= 4999.99f) {
+	AJP = 5000.0f;
+}
 
+if (PJP >= 9999.99f) {
+	PJP = 10000.0f;
+}
 
-//if (RJP >= 2999.99f) {
-//	RJP = 3000.0f;
-//}
-//
-//if (AJP >= 4999.99f) {
-//	AJP = 5000.0f;
-//}
-//
-//if (PJP >= 9999.99f) {
-//	PJP = 10000.0f;
-//}
-//
-//if (fcount > 800)
-//fcount = 0;
-//}
+if (fcount > 800)
+fcount = 0;
+}
 
 void Haitou::ManageState()
 {

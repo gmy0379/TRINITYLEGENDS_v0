@@ -11,12 +11,12 @@ Choice::Choice()
 	//背景を用意する
 	Levelselect.Init("Assets/sprite/MG_Level.dds", 1920.0f, 1080.0f);
 	//選択音
-	g_soundEngine->ResistWaveFileBank(4, "Assets/sound/updown.wav");
-	g_soundEngine->ResistWaveFileBank(5, "Assets/sound/kettei.wav");
-	g_soundEngine->ResistWaveFileBank(7, "Assets/sound/MG_choiceBGM.wav");
+	g_soundEngine->ResistWaveFileBank(2, "Assets/sound/updown.wav");
+	g_soundEngine->ResistWaveFileBank(3, "Assets/sound/kettei.wav");
+	g_soundEngine->ResistWaveFileBank(4, "Assets/sound/MG_choiceBGM.wav");
 	//ルールのBGMを再生する。
 	choiceBGM = NewGO<SoundSource>(0);
-	choiceBGM->Init(7);
+	choiceBGM->Init(4);
 	choiceBGM->SetVolume(VOLch);
 	choiceBGM->Play(true);
 	game = FindGO<Game>("game");
@@ -34,7 +34,7 @@ void Choice::Update()
 			if (g_pad[0]->IsTrigger(enButtonUp))
 			{
 				SoundSource* se = NewGO<SoundSource>(0);
-				se->Init(4);
+				se->Init(2);
 				se->SetVolume(1.7f);
 				se->Play(false);
 				sentaku++;
@@ -44,7 +44,7 @@ void Choice::Update()
 			if (g_pad[0]->IsTrigger(enButtonDown))
 			{
 				SoundSource* se = NewGO<SoundSource>(0);
-				se->Init(4);
+				se->Init(2);
 				se->SetVolume(1.5f);
 				se->Play(false);
 				sentaku--;
@@ -53,7 +53,7 @@ void Choice::Update()
 
 		if (g_pad[0]->IsTrigger(enButtonStart)&& st==0) {
 			SoundSource* se = NewGO<SoundSource>(0);
-			se->Init(5);
+			se->Init(3);
 			se->SetVolume(1.5f);
 			se->Play(false);
 			while (VOLch == 0) {

@@ -6,10 +6,10 @@ GameClear::GameClear()
 {
 	//ゲームクリアの画像を読み込む
 	spriteRender.Init("Assets/Sprite/MG_gameclear.dds", 1920.0f, 1080.0f);
-	g_soundEngine->ResistWaveFileBank(26, "Assets/sound/MG_gameclear.wav");
+	g_soundEngine->ResistWaveFileBank(16, "Assets/sound/MG_gameclear.wav");
 	//ゲームクリアのBGMを再生する。
 	titleBGM = NewGO<SoundSource>(0);
-	titleBGM->Init(26);
+	titleBGM->Init(16);
 	titleBGM->SetVolume(2.5f);
 	titleBGM->Play(true);
 }

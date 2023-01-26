@@ -26,8 +26,8 @@
 namespace 
 {
 int ballfall = 0;
-float VOL_main = 1.4f;
-float GET_main = 1.0f;
+float VOL_main = 0.7f;
+float GET_main = 1.8f;
 int sky = 0;
 }
 
@@ -37,6 +37,9 @@ Game::Game()
 	PhysicsWorld::GetInstance()->SetGravity({ 0.0f,-550.0f,0.01f });
 	srand((unsigned int)time(NULL));
 	
+
+	// 現在の空を破棄。
+	DeleteGO(m_skyCube);
 	InitSky();
 
 	//カウンタークラスを作成
@@ -68,6 +71,29 @@ Game::Game()
 	text = NewGO<Text>(0);
 	haitou = NewGO<Haitou>(0);
 
+	//ゲーム画面で使うBGMを読み込む
+	//g_soundEngine->ResistWaveFileBank(1, "Assets/sound/MG_TITLEbgm.wav");
+	//g_soundEngine->ResistWaveFileBank(2, "Assets/sound/updown.wav");
+	//g_soundEngine->ResistWaveFileBank(3, "Assets/sound/kettei.wav");
+	//g_soundEngine->ResistWaveFileBank(4, "Assets/sound/MG_choiceBGM.wav");
+	g_soundEngine->ResistWaveFileBank(5, "Assets/sound/MG_main1.wav");
+	g_soundEngine->ResistWaveFileBank(6, "Assets/sound/MG_main2.wav");
+	g_soundEngine->ResistWaveFileBank(7, "Assets/sound/MG_main3.wav");
+	g_soundEngine->ResistWaveFileBank(8, "Assets/sound/MG_main4.wav");
+	g_soundEngine->ResistWaveFileBank(9, "Assets/sound/pinch.wav");
+	g_soundEngine->ResistWaveFileBank(10, "Assets/sound/smallWIN.wav");
+	g_soundEngine->ResistWaveFileBank(11, "Assets/sound/mediumWIN.wav");
+	g_soundEngine->ResistWaveFileBank(12, "Assets/sound/RJPwin.wav");
+	g_soundEngine->ResistWaveFileBank(13, "Assets/sound/AJPwin.wav");
+	g_soundEngine->ResistWaveFileBank(23, "Assets/sound/PJPwin.wav");
+	g_soundEngine->ResistWaveFileBank(15, "Assets/sound/Staffrole.wav");
+	g_soundEngine->ResistWaveFileBank(16, "Assets/sound/MG_gameclear.wav");
+	g_soundEngine->ResistWaveFileBank(17, "Assets/sound/MG_Gameover.wav");
+	g_soundEngine->ResistWaveFileBank(18, "Assets/sound/medalGET.wav");
+	g_soundEngine->ResistWaveFileBank(19, "Assets/sound/rubyfall.wav");
+	g_soundEngine->ResistWaveFileBank(22, "Assets/sound/ballget.wav");
+
+
 	//フィールドにばらまかれるメダルの枚数を設定
 	win = rand() % 50+300;
 	for (int i = 0; i < win; i++) {
@@ -75,28 +101,8 @@ Game::Game()
 	}
 	win = 0;
 
-	//ゲーム中のBGMを読み込む。
-	g_soundEngine->ResistWaveFileBank(9, "Assets/sound/RJPCBGM.wav");
-	g_soundEngine->ResistWaveFileBank(10, "Assets/sound/AJPCBGM.wav");
-	g_soundEngine->ResistWaveFileBank(11, "Assets/sound/PJPCBGM.wav");
-	g_soundEngine->ResistWaveFileBank(12, "Assets/sound/RJPBGM.wav");
-	g_soundEngine->ResistWaveFileBank(13, "Assets/sound/AJPBGM.wav");
-	g_soundEngine->ResistWaveFileBank(14, "Assets/sound/PJPBGM.wav");
-	g_soundEngine->ResistWaveFileBank(15, "Assets/sound/Staffrole.wav");
-	g_soundEngine->ResistWaveFileBank(16, "Assets/sound/MG_Rule.wav");
-	g_soundEngine->ResistWaveFileBank(18, "Assets/sound/pinch.wav");
-	g_soundEngine->ResistWaveFileBank(19, "Assets/sound/smallWIN.wav");
-	g_soundEngine->ResistWaveFileBank(20, "Assets/sound/mediumWIN.wav");
-	g_soundEngine->ResistWaveFileBank(21, "Assets/sound/jpWIN.wav");
-	g_soundEngine->ResistWaveFileBank(25, "Assets/sound/MG_main2.wav");
-	g_soundEngine->ResistWaveFileBank(26, "Assets/sound/MG_main3.wav");
-	g_soundEngine->ResistWaveFileBank(27, "Assets/sound/MG_main4.wav");
-	g_soundEngine->ResistWaveFileBank(28, "Assets/sound/MG_main1.wav");
-	g_soundEngine->ResistWaveFileBank(29, "Assets/sound/AJPwin.wav");
-	g_soundEngine->ResistWaveFileBank(29, "Assets/sound/PJPwin.wav");
-
 	if (choice == nullptr) {
-		music = rand() % 3 + 25;
+		music = rand() % 3 + 5;
 	//ゲーム中のBGMを再生する。
 		gameBGM = NewGO<SoundSource>(0);
 		gameBGM->Init(music);
@@ -112,22 +118,21 @@ Game::Game()
 }
 
 void Game::InitSky()
-{
+{	
 	sky = rand() % 17;
 	if (sky == 16) {
 		sky = 3;
 	}
-	// 現在の空を破棄。
-	DeleteGO(m_skyCube);
+
 
 	m_skyCube = NewGO<SkyCube>(1, "skycube");
 	m_skyCube->SetType((EnSkyCubeType)sky);		//SkyCubeのタイプを呼び出し
 	//m_skyCube->SetPosition(Vector3(-100.0f, -40.0f, -900.0f));
-	m_skyCube->SetLuminance(0.5f);
-	m_skyCube->SetScale(200);
+	m_skyCube->SetLuminance(0.2f);
+	m_skyCube->SetScale(300);
 
 	// 環境光の計算のためのIBLテクスチャをセットする。
-	g_renderingEngine->SetAmbientByIBLTexture(m_skyCube->GetTextureFilePath(), 0.1f);
+	g_renderingEngine->SetAmbientByIBLTexture(m_skyCube->GetTextureFilePath(), 0.3f);
 }
 
 Game::~Game()
@@ -168,12 +173,15 @@ void Game::Update()
 			//Aボタンを押している時間でメダルの投下を調整
 
 			if (Mctrl >= 10) {
+				addJP = 0;
 				//g_gameTime->GetFrameDeltaTime() * 0.001f;
 				Medal* medal = NewGO<Medal>(0, "medal");
 				counter->Mcount--;
 				counter->Mfall++;
 				Mctrl = 0;
+				addJP = 1;
 			}
+			
 		}
 		else Mctrl = 0;
 	}
@@ -201,13 +209,11 @@ void Game::Update()
 	}
 
 	//初期時間の設定
-	int MIN = 0;
-	int SEC = 0;
 	const int TIME = 0;
 
 	//タイム計測
 	wchar_t wcsbuf[256];
-	swprintf_s(wcsbuf, 256, L"経過時間　%d分%d秒", min,sec);
+	swprintf_s(wcsbuf, 256, L"経過時間　%d時間%d分%d秒", hour,min,sec);
 
 	sec = (TIME + int(m_time));
 	if (sec == 60) {
@@ -216,7 +222,12 @@ void Game::Update()
 		min += 1;
 		
 	}
+	if (min == 60){
+		min=0;
+		hour+=1;
+	}
 
+	//m_time += g_gameTime->GetFrameDeltaTime()*100.5f;
 	m_time += g_gameTime->GetFrameDeltaTime();
 
 	//表示するテキストを設定。
@@ -224,7 +235,7 @@ void Game::Update()
 	//フォントの位置を設定。
 	fontRender.SetPosition(Vector3(-950.0f, 500.0f, 0.0f));
 	//フォントの大きさを設定。
-	fontRender.SetScale(2.0f);
+	fontRender.SetScale(1.3f);
 	fontRender.SetColor(1.0f, 0.0f, 0.0f, 1.0f);
 
 	//メダルの総獲得枚数が100枚ごとにボールを投下する
@@ -312,7 +323,7 @@ void Game::Ballwin()
 			switch (jpstate) {
 			case 7:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 200;
@@ -321,7 +332,7 @@ void Game::Ballwin()
 				break;
 			case 9:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 200;
@@ -331,16 +342,17 @@ void Game::Ballwin()
 			case 1:
 				InitSky();
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(21);
+				gameBGM->Init(12);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = text->RJP;
 				text->RJP = 1000.0f;
+				JP = 1;
 				ball1->ballState = 0;
 				break;
 			default:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(19);
+				gameBGM->Init(10);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 100;
@@ -363,7 +375,7 @@ void Game::Ballwin()
 			switch (jpstate) {
 			case 7:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 300;
@@ -372,7 +384,7 @@ void Game::Ballwin()
 				break;
 			case 9:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 300;
@@ -380,17 +392,19 @@ void Game::Ballwin()
 				ball2->ballState = 0;
 				break;
 			case 77:
+				InitSky();
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(29);
+				gameBGM->Init(13);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = text->AJP;
 				text->AJP = 1500.0f;
+				JP = 2;
 				ball2->ballState = 0;
 				break;
 			case 38:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 300;
@@ -399,7 +413,7 @@ void Game::Ballwin()
 				break;
 			case 74:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 300;
@@ -408,7 +422,7 @@ void Game::Ballwin()
 				break;
 			default:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(19);
+				gameBGM->Init(10);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 200;
@@ -419,8 +433,7 @@ void Game::Ballwin()
 			counter->Mcount += win;
 			DeleteGO(ball2);
 			haitou->State = 1;
-			jpstate = 0;
-			haitou->State = 0;
+			haitou->fcount = 0;
 		}
 	}
 
@@ -431,7 +444,7 @@ void Game::Ballwin()
 			switch (jpstate) {
 			case 7:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 500;
@@ -440,7 +453,7 @@ void Game::Ballwin()
 				break;
 			case 9:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 500;
@@ -448,17 +461,19 @@ void Game::Ballwin()
 				ball3->ballState = 0;
 				break;
 			case 77:
+				InitSky();
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(30);
+				gameBGM->Init(23);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = text->PJP;
 				text->RJP = 3000.0f;
+				JP = 3;
 				ball3->ballState = 0;
 				break;
 			case 102:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 500;
@@ -467,7 +482,7 @@ void Game::Ballwin()
 				break;
 			case 113:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 500;
@@ -476,7 +491,7 @@ void Game::Ballwin()
 				break;
 			case 179:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 500;
@@ -485,7 +500,7 @@ void Game::Ballwin()
 				break;
 			case 277:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(20);
+				gameBGM->Init(11);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 500;
@@ -494,7 +509,7 @@ void Game::Ballwin()
 				break;
 			default:
 				gameBGM = NewGO<SoundSource>(0);
-				gameBGM->Init(19);
+				gameBGM->Init(10);
 				gameBGM->SetVolume(GET_main);
 				gameBGM->Play(false);
 				win = 300;
@@ -509,8 +524,7 @@ void Game::Ballwin()
 			counter->Mcount += win;
 			DeleteGO(ball3);
 			haitou->State = 1;
-			jpstate = 0;
-			haitou->State = 0;
+			haitou->fcount = 0;
 		}
 	}
 }

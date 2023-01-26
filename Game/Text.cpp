@@ -48,15 +48,18 @@ fontRender.SetShadowParam(true, 0.8f, Vector4(0.0f, 0.0f, 0.0f, 0.8f));
 
 float rjpc = (RJP + addR);
 
-if (g_pad[0]->IsTrigger(enButtonA))
-{
-	addR += 0.06f;
-	addA += 0.07f;
+if (g_pad[0]->IsPress(enButtonA)) {
+	if (game->addJP==1)
+	{
+		RJP += 0.002f;
+		AJP += 0.005f;
+	}
 }
 
-//addR += g_gameTime->GetFrameDeltaTime();
-//addA += g_gameTime->GetFrameDeltaTime()*1.2;
-//addP += g_gameTime->GetFrameDeltaTime()*6.5;
+
+addR += g_gameTime->GetFrameDeltaTime();
+addA += g_gameTime->GetFrameDeltaTime()*1.2;
+addP += g_gameTime->GetFrameDeltaTime()*6.5;
 
 if (RJP >= 2999.99f) {
 	RJP = 3000.0f;

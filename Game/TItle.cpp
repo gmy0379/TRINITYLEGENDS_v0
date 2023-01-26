@@ -4,7 +4,7 @@
 #include "sound/SoundEngine.h"
 #include "Choice.h"
 
-#include "Fade.h"
+//#include "Fade.h"
 
 float VOLUME = 70.0f;
 
@@ -12,16 +12,17 @@ Title::Title()
 {
 	TITLE.Init("Assets/sprite/MG_TITLE.dds", 1920.0f, 1080.0f);
 
-	//タイトルのBGMを読み込む。
-	g_soundEngine->ResistWaveFileBank(6, "Assets/sound/MG_TITLEbgm.wav");
+	//タイトル中のBGMを前もって読み込む。
+	g_soundEngine->ResistWaveFileBank(1, "Assets/sound/MG_TITLEbgm.wav");
+
 	
 	////タイトルのBGMを再生する。
 	titleBGM = NewGO<SoundSource>(0);
-	titleBGM->Init(6);
+	titleBGM->Init(1);
 	titleBGM->SetVolume(VOLUME/100);
 	titleBGM->Play(true);
 
-	m_fade = FindGO<Fade>("fade");
+	//m_fade = FindGO<Fade>("fade");
 }
 
 Title::~Title()
