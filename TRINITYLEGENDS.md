@@ -10,7 +10,7 @@
 　三人称視点のプッシャー式メダルゲームで、
 最初に与えられる**1000枚**から、一定数のメダルを獲得口に落とすとフィールドに投下されるボールを落とし、メダルの大量獲得を目指すゲームです。
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/E4G8Av2CdBI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+https://www.youtube.com/embed/E4G8Av2CdBI
 
 ### ・使用ゲームエンジン
 
@@ -161,7 +161,6 @@ STARTボタン：レベルの決定
 ### ・横穴の実装
 ゲームセンターで見かけるメダルゲームと遜色ないようにするために、メダルが横に流れる横穴(アウトポケット)を実装し、容易にゲームをクリアできないようにしました。
 また、レベル選択で横穴の開度を選択できるようにし、メダルゲームが得意ではない人でも楽しめるようにしました。
-
 ### ・ボール払い出し装置
 　　ボールをそのまま排出するのは味気ないと思ったため、払い出し装置に演出を加え、
 直接ボールを獲得出来る機会を設けました。
